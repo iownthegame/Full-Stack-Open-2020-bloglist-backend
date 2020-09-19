@@ -1,5 +1,4 @@
 const _ = require('lodash')
-const { count } = require('../models/blog')
 
 const dummy = (_blogs) => {
   return 1
