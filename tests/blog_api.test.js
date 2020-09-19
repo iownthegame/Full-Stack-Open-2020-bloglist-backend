@@ -88,6 +88,34 @@ test('a blog with undefined like will set to 0', async () => {
   expect(blogsAtEnd[blogsAtEnd.length-1].likes).toBe(0)
 })
 
+test('blog without title or url is not added', async () => {
+  const newBlogWithoutTitle = {
+    author: 'Author new',
+    url: 'https://blog.new'
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlogWithoutTitle)
+    .expect(400)
+
+  const blogsAtEnd = await helper.blogsInDb()
+  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
+
+  const newBlogWithoutUrl = {
+    title: 'Blog title new',
+    author: 'Author new'
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlogWithoutUrl)
+    .expect(400)
+
+  const blogsAtEndAgain = await helper.blogsInDb()
+  expect(blogsAtEndAgain).toHaveLength(helper.initialBlogs.length)
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })
