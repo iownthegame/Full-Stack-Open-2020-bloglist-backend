@@ -38,9 +38,28 @@ const mostBlogs = (blogs) => {
   }
 }
 
+const mostLikes = (blogs) => {
+  if (blogs.length === 0) {
+    return null
+  }
+
+  const countTable = _(blogs)
+    .groupBy('author')
+    .map((value, key) => ({ author: key, count: totalLikes(value) }))
+    .value()
+
+  const maxLike = Math.max(...countTable.map(item => item.count))
+
+  return {
+    author: countTable.find(item => item.count === maxLike).author,
+    likes: maxLike
+  }
+}
+
 module.exports = {
   dummy,
   totalLikes,
   favoriteBlog,
-  mostBlogs
+  mostBlogs,
+  mostLikes
 }
