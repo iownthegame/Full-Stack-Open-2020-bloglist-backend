@@ -29,12 +29,16 @@ test('all blogs are returned', async () => {
 
 test('a specific blog is within the returned blogs', async () => {
   const response = await api.get('/api/blogs')
-
   const titles = response.body.map(r => r.title)
 
   expect(titles).toContain(
     'Blog title 1'
   )
+})
+
+test('id is defined in the returned blog', async () => {
+  const blogs = await helper.blogsInDb()
+  expect(blogs[0].id).toBeDefined()
 })
 
 
