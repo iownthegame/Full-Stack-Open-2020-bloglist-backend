@@ -9,11 +9,11 @@ beforeEach(async () => {
   await Blog.deleteMany({})
 
   const blogObjects = helper.initialBlogs.map(blog => new Blog(blog))
-  const promiseArray = blogObjects.map(note => note.save())
+  const promiseArray = blogObjects.map(blog => blog.save())
   await Promise.all(promiseArray)
 })
 
-describe('when there is initially some notes saved', () => {
+describe('when there is initially some blogs saved', () => {
   test('blogs are returned as json', async () => {
     await api
       .get('/api/blogs')
@@ -42,7 +42,7 @@ describe('when there is initially some notes saved', () => {
   })
 })
 
-describe('addition of a new note', () => {
+describe('addition of a new blog', () => {
   test('a valid blog can be added', async () => {
     const newBlog = {
       title: 'Blog title new',
