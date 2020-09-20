@@ -60,8 +60,8 @@ describe('addition of a new blog', () => {
     const blogsAtEnd = await helper.blogsInDb()
     expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
 
-    const contents = blogsAtEnd.map(n => n.title)
-    expect(contents).toContain(
+    const titles = blogsAtEnd.map(n => n.title)
+    expect(titles).toContain(
       'Blog title new'
     )
   })
@@ -82,8 +82,8 @@ describe('addition of a new blog', () => {
     const blogsAtEnd = await helper.blogsInDb()
     expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
 
-    const contents = blogsAtEnd.map(n => n.title)
-    expect(contents).toContain(
+    const titles = blogsAtEnd.map(n => n.title)
+    expect(titles).toContain(
       'Blog title new'
     )
 
@@ -134,9 +134,9 @@ describe('deletion of a blog', () => {
       helper.initialBlogs.length - 1
     )
 
-    const contents = blogsAtEnd.map(r => r.title)
+    const titles = blogsAtEnd.map(r => r.title)
 
-    expect(contents).not.toContain(blogToDelete.title)
+    expect(titles).not.toContain(blogToDelete.title)
   })
 })
 
